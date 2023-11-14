@@ -22,6 +22,8 @@ static int	countdig(int num)
 	int	i;
 
 	i = 0;
+	if (num == 0)
+		i = 1;
 	if (num < 0)
 	{
 		i++;
@@ -42,7 +44,7 @@ int	ft_putnbr_pf(int num)
 	n = num;
 	if (n == -2147483648)
 	{
-		write(1, "-2147483648", 11);
+		return (write(1, "-2147483648", 11));
 	}
 	else
 	{

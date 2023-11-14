@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
 
 int	ft_format(va_list args, char *str)
 {
@@ -63,12 +64,4 @@ int	ft_printf(const char *str, ...)
 	}
 	va_end(args);
 	return (i);
-}
-
-int	main(void)
-{
-	// int *ptr;
-	// ptr = malloc(sizeof(int));
-	printf("ft_printf value %d\n", ft_printf("%s\n", "hello "));
-	printf("printf value %d\n", printf("%s\n", "hello "));
 }

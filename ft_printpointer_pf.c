@@ -12,16 +12,13 @@
 
 #include "ft_printf.h"
 
-static int	count_pp(int num)
+static int	count_pp(unsigned long long num)
 {
 	int	i;
 
 	i = 0;
-	if (num < 0)
-	{
-		i++;
-		num = -num;
-	}
+	if (num == 0)
+		i = 1;
 	while (num != 0)
 	{
 		num = num / 10;
@@ -38,14 +35,11 @@ static int	ft_putlhex_pp(unsigned long long num)
 	unsigned long long	n;
 
 	n = num;
-	str = (char *)malloc(count_pp(n) * sizeof(char));
+	if (n == 0)
+		return (write(1, "0", 1));
+	str = (char *)malloc((count_pp(n)) * sizeof(char));
 	if (!str)
 		return (-1);
-	if (n == 0)
-	{
-		free(str);
-		return (write(1, "0", 1));
-	}
 	base = "0123456789abcdef";
 	i = 0;
 	while (n > 0)
@@ -53,8 +47,10 @@ static int	ft_putlhex_pp(unsigned long long num)
 		str[i++] = base[n % 16];
 		n = n / 16;
 	}
+	str[i] = '\0';
 	write(1, "0x", 2);
 	ft_putstrrev_pf(str);
+	free(str);
 	return (i + 2);
 }
 
@@ -62,6 +58,8 @@ int	ft_printpointer_pf(void *ptr)
 {
 	unsigned long long	num;
 
+	if (!ptr)
+		return (write(1, "(nil)", 5));
 	num = (unsigned long long)ptr;
 	return (ft_putlhex_pp(num));
 }

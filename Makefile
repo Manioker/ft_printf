@@ -10,25 +10,30 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	ft_printf.c ft_printpointer_pf.c ft_putchard_pf.c ft_putlhex_pf.c ft_putnbr_pf.c \
-		ft_putstr_pf.c ft_putstrrev_pf.c ft_putuhex_pf.c ft_putunsnbr_pf.c 
+NAME = libftprintf.a
 
-OBJ = $(SRC:.c=.o)
+SRC = ft_printf.c ft_printpointer_pf.c ft_putchard_pf.c ft_putlhex_pf.c ft_putnbr_pf.c ft_putstr_pf.c ft_putstrrev_pf.c ft_putuhex_pf.c ft_putunsnbr_pf.c
+
+OBJS = $(SRC:.c=.o)
+
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = libftprintf.a
+RM = rm -rf
 
-$(NAME): $(OBJ)
-	ar -rcs $(NAME) $(OBJ)
+AR = ar crs
 
 all: $(NAME)
 
+$(NAME): $(OBJS)
+	$(AR) $@ $^
+
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

@@ -22,6 +22,8 @@ static int	countdig2(unsigned int num)
 	unsigned int	i;
 
 	i = 0;
+	if (num == 0)
+		i = 1;
 	while (num != 0)
 	{
 		num = num / 10;

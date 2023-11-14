@@ -12,19 +12,16 @@
 
 #include "ft_printf.h"
 
-static int	countdigit(int num)
+static int	countdigit(unsigned int num)
 {
 	int	i;
 
 	i = 0;
-	if (num < 0)
-	{
-		i++;
-		num = -num;
-	}
+	if (num == 0)
+		i = 1;
 	while (num != 0)
 	{
-		num = num / 10;
+		num = num / 16;
 		i++;
 	}
 	return (i);
@@ -32,13 +29,13 @@ static int	countdigit(int num)
 
 int	ft_putuhex_pf(unsigned int num)
 {
-	char	*base;
-	char	*str;
-	int		i;
-	int		n;
+	char			*base;
+	char			*str;
+	int				i;
+	unsigned int	n;
 
 	n = num;
-	str = (char *)malloc(countdigit(n) * sizeof(char));
+	str = (char *)malloc((countdigit(n) + 1) * sizeof(char));
 	if (!str)
 		return (-1);
 	if (n == 0)
@@ -53,6 +50,7 @@ int	ft_putuhex_pf(unsigned int num)
 		str[i++] = base[n % 16];
 		n = n / 16;
 	}
+	str[i] = '\0';
 	ft_putstrrev_pf(str);
 	free(str);
 	return (i);
@@ -60,5 +58,6 @@ int	ft_putuhex_pf(unsigned int num)
 
 // int	main(void)
 // {
-// 	printf("\n%d\n", ft_putuhex_pf(420));
+// 	printf("\n%d\n", ft_putuhex_pf(-1));
+// 	printf("%d\n", printf("%X", -1));
 // }

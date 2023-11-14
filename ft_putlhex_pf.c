@@ -12,30 +12,27 @@
 
 #include "ft_printf.h"
 
-static int	countdi(int num)
+static int	countdi(unsigned int num)
 {
 	int	i;
 
 	i = 0;
-	if (num < 0)
-	{
-		i++;
-		num = -num;
-	}
+	if (num == 0)
+		return (1);
 	while (num != 0)
 	{
-		num = num / 10;
 		i++;
+		num = num / 16;
 	}
 	return (i);
 }
 
 int	ft_putlhex_pf(unsigned int num)
 {
-	char	*base;
-	char	*str;
-	int		i;
-	int		n;
+	char			*base;
+	char			*str;
+	int				i;
+	unsigned int	n;
 
 	n = num;
 	str = (char *)malloc(countdi(n) * sizeof(char));
@@ -53,6 +50,7 @@ int	ft_putlhex_pf(unsigned int num)
 		str[i++] = base[n % 16];
 		n = n / 16;
 	}
+	str[i] = '\0';
 	ft_putstrrev_pf(str);
 	free(str);
 	return (i);
