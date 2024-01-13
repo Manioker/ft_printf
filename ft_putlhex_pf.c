@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putlhex_pf.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andi <andi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: avacca <avacca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:25:14 by andi              #+#    #+#             */
-/*   Updated: 2023/11/13 20:22:49 by andi             ###   ########.fr       */
+/*   Updated: 2024/01/13 15:37:11 by avacca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	countdi(unsigned int num)
+static int	countdigit(unsigned int num)
 {
 	int	i;
 
 	i = 0;
 	if (num == 0)
-		return (1);
+		i = 1;
 	while (num != 0)
 	{
-		i++;
 		num = num / 16;
+		i++;
 	}
 	return (i);
 }
@@ -35,7 +35,7 @@ int	ft_putlhex_pf(unsigned int num)
 	unsigned int	n;
 
 	n = num;
-	str = (char *)malloc(countdi(n) * sizeof(char));
+	str = (char *)malloc((countdigit(n) + 1) * sizeof(char));
 	if (!str)
 		return (-1);
 	if (n == 0)

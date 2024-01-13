@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printpointer_pf.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andi <andi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: avacca <avacca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:59:31 by andi              #+#    #+#             */
-/*   Updated: 2023/11/13 20:22:31 by andi             ###   ########.fr       */
+/*   Updated: 2024/01/13 15:44:38 by avacca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	count_pp(unsigned long long num)
 		i = 1;
 	while (num != 0)
 	{
-		num = num / 10;
+		num = num / 16;
 		i++;
 	}
 	return (i);
@@ -37,7 +37,7 @@ static int	ft_putlhex_pp(unsigned long long num)
 	n = num;
 	if (n == 0)
 		return (write(1, "0", 1));
-	str = (char *)malloc((count_pp(n)) * sizeof(char));
+	str = (char *)malloc((count_pp(n) + 1) * sizeof(char));
 	if (!str)
 		return (-1);
 	base = "0123456789abcdef";
